@@ -7,7 +7,6 @@ import java.awt.geom.Path2D;
 import java.beans.PersistenceDelegate;
 import java.beans.XMLEncoder;
 
-
 /**
  * Persistence Delegates for {@link java.awt.Shape} objects.
  * <p>
@@ -16,8 +15,10 @@ import java.beans.XMLEncoder;
  * <ul>
  * <li>{@link AreaDelegate} for {@link Area} shapes
  * <li>{@link GeneralPathDelegate} for {@link GeneralPath} shapes
- * <li>{@link Path2DDelegate} for {@link Path2D.Float} shapes
- * <li>{@link Path2DDoubleDelegate} for {@link Path2D.Double} shapes
+ * <li>{@link Path2DDelegate.Float} for {@link java.awt.geom.Path2D.Float
+ * Path2D.Float} shapes
+ * <li>{@link Path2DDelegate.Double} for {@link java.awt.geom.Path2D.Double
+ * Path2D.Double} shapes
  * </ul>
  *
  * @author Arthur Neufeld

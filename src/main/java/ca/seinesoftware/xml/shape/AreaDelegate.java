@@ -12,12 +12,13 @@ import java.beans.XMLEncoder;
  * shapes.
  * <p>
  * The {@code Area} is written to the XML stream by converting the Area into a
- * {@link Path2D.Double} shape, and writing an {@code <object/>} tag which uses
- * the {@code Path2D} shape as a constructor argument.
+ * {@link java.awt.geom.Path2D.Double Path2D.Double} shape, and writing an
+ * {@code <object/>} tag which uses the {@code Path2D} shape as a constructor
+ * argument.
  * <p>
- * Since this delegate internally uses a {@link Path2D.Double} shape, the
- * {@link Path2DDelegate.Double} must be added to the {@link XMLEncoder}, in
- * order for this delegate to function properly.
+ * Since this delegate internally uses a {@link java.awt.geom.Path2D.Double
+ * Path2D.Double} shape, the {@link Path2DDelegate.Double} must be added to the
+ * {@link XMLEncoder}, in order for this delegate to function properly.
  *
  * @since 1.0.0
  */

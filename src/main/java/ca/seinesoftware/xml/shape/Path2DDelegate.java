@@ -4,10 +4,20 @@ import java.awt.Shape;
 import java.awt.geom.PathIterator;
 import java.beans.DefaultPersistenceDelegate;
 import java.beans.Encoder;
+import java.beans.PersistenceDelegate;
 import java.beans.Statement;
 
 /**
  * Persistence Delegates for {@link java.awt.geom.Path2D Path2D} objects.
+ * <p>
+ * The following {@link PersistenceDelegate} classes are defined:
+ *
+ * <ul>
+ * <li>{@link Path2DDelegate.Float} for {@link java.awt.geom.Path2D.Float
+ * Path2D.Float} shapes
+ * <li>{@link Path2DDelegate.Double} for {@link java.awt.geom.Path2D.Double
+ * Path2D.Double} shapes
+ * </ul>
  *
  * @since 1.0.0
  */
@@ -32,10 +42,6 @@ public class Path2DDelegate {
 		}
 
 		private float coords[] = new float[6];
-		private java.lang.Float pnt0[] = new java.lang.Float[0];
-		private java.lang.Float pnt1[] = new java.lang.Float[2];
-		private java.lang.Float pnt2[] = new java.lang.Float[4];
-		private java.lang.Float pnt3[] = new java.lang.Float[6];
 		private java.lang.Float pnts[];
 
 		@Override
@@ -46,27 +52,27 @@ public class Path2DDelegate {
 
 			for (PathIterator pi = shape.getPathIterator(null); !pi.isDone(); pi.next()) {
 				int type = pi.currentSegment(coords);
-				String cmd;
+				String method;
 				switch (type) {
 				case PathIterator.SEG_CLOSE:
-					cmd = "closePath";
-					pnts = pnt0;
+					method = "closePath";
+					pnts = new java.lang.Float[0];
 					break;
 				case PathIterator.SEG_MOVETO:
-					cmd = "moveTo";
-					pnts = pnt1;
+					method = "moveTo";
+					pnts = new java.lang.Float[2];
 					break;
 				case PathIterator.SEG_LINETO:
-					cmd = "lineTo";
-					pnts = pnt1;
+					method = "lineTo";
+					pnts = new java.lang.Float[2];
 					break;
 				case PathIterator.SEG_QUADTO:
-					cmd = "quadTo";
-					pnts = pnt2;
+					method = "quadTo";
+					pnts = new java.lang.Float[4];
 					break;
 				case PathIterator.SEG_CUBICTO:
-					cmd = "curveTo";
-					pnts = pnt3;
+					method = "curveTo";
+					pnts = new java.lang.Float[6];
 					break;
 				default:
 					throw new IllegalStateException("Unexpected segment type: " + type);
@@ -76,7 +82,7 @@ public class Path2DDelegate {
 					pnts[i] = coords[i];
 				}
 
-				out.writeStatement(new Statement(oldInstance, cmd, pnts));
+				out.writeStatement(new Statement(oldInstance, method, pnts));
 			}
 		}
 	}
@@ -94,10 +100,6 @@ public class Path2DDelegate {
 		}
 
 		private double coords[] = new double[6];
-		private java.lang.Double pnt0[] = new java.lang.Double[0];
-		private java.lang.Double pnt1[] = new java.lang.Double[2];
-		private java.lang.Double pnt2[] = new java.lang.Double[4];
-		private java.lang.Double pnt3[] = new java.lang.Double[6];
 		private java.lang.Double pnts[];
 
 		@Override
@@ -108,27 +110,27 @@ public class Path2DDelegate {
 
 			for (PathIterator pi = shape.getPathIterator(null); !pi.isDone(); pi.next()) {
 				int type = pi.currentSegment(coords);
-				String cmd;
+				String method;
 				switch (type) {
 				case PathIterator.SEG_CLOSE:
-					cmd = "closePath";
-					pnts = pnt0;
+					method = "closePath";
+					pnts = new java.lang.Double[0];
 					break;
 				case PathIterator.SEG_MOVETO:
-					cmd = "moveTo";
-					pnts = pnt1;
+					method = "moveTo";
+					pnts = new java.lang.Double[2];
 					break;
 				case PathIterator.SEG_LINETO:
-					cmd = "lineTo";
-					pnts = pnt1;
+					method = "lineTo";
+					pnts = new java.lang.Double[2];
 					break;
 				case PathIterator.SEG_QUADTO:
-					cmd = "quadTo";
-					pnts = pnt2;
+					method = "quadTo";
+					pnts = new java.lang.Double[4];
 					break;
 				case PathIterator.SEG_CUBICTO:
-					cmd = "curveTo";
-					pnts = pnt3;
+					method = "curveTo";
+					pnts = new java.lang.Double[6];
 					break;
 				default:
 					throw new IllegalStateException("Unexpected segment type: " + type);
@@ -138,7 +140,7 @@ public class Path2DDelegate {
 					pnts[i] = coords[i];
 				}
 
-				out.writeStatement(new Statement(oldInstance, cmd, pnts));
+				out.writeStatement(new Statement(oldInstance, method, pnts));
 			}
 		}
 	}

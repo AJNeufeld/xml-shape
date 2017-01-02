@@ -78,10 +78,10 @@ public class ShapeDelegatesTest {
 				ShapeDelegates.setDelegates(encoder);
 				encoder.writeObject(shape);
 			}
+			// System.out.println(baos.toString("UTF-8"));
 			data = baos.toByteArray();
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(data);
-				XMLDecoder decoder = new XMLDecoder(bais)) {
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(data); XMLDecoder decoder = new XMLDecoder(bais)) {
 			shape = (Shape) decoder.readObject();
 		}
 		return shape;
@@ -143,8 +143,7 @@ public class ShapeDelegatesTest {
 			// System.out.println(baos.toString("UTF-8"));
 			data = baos.toByteArray();
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(data);
-				XMLDecoder decoder = new XMLDecoder(bais)) {
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(data); XMLDecoder decoder = new XMLDecoder(bais)) {
 			compareShapes(area, (Shape) decoder.readObject());
 			compareShapes(gp, (Shape) decoder.readObject());
 			compareShapes(pathf, (Shape) decoder.readObject());
@@ -202,7 +201,8 @@ public class ShapeDelegatesTest {
 			iterA.next();
 		}
 
-		// Ensure the iterators both ended at the same time
+		// printShape("Expected: ", expected);
+		// printShape("Actual: ", actual);
 		assertTrue("Path lengths differ", iterE.isDone() && iterA.isDone());
 
 		// If the shapes are truly identical, creating Constructive Area
@@ -211,5 +211,34 @@ public class ShapeDelegatesTest {
 		Area difference = new Area(expected);
 		difference.exclusiveOr(new Area(actual));
 		assertTrue("Areas differ", difference.isEmpty());
+	}
+
+	@SuppressWarnings("unused")
+	private void printShape(String prefix, Shape shape) {
+		System.out.println(prefix + shape.getClass().getName());
+		double coord[] = new double[6];
+		for (PathIterator pi = shape.getPathIterator(null); !pi.isDone(); pi.next()) {
+
+			int type = pi.currentSegment(coord);
+
+			switch (type) {
+			case PathIterator.SEG_MOVETO:
+				System.out.format("  moveTo(%f,%f)%n", coord[0], coord[1]);
+				break;
+			case PathIterator.SEG_LINETO:
+				System.out.format("  lineTo(%f,%f)%n", coord[0], coord[1]);
+				break;
+			case PathIterator.SEG_QUADTO:
+				System.out.format("  quadTo(%f,%f ; %f,%f)%n", coord[0], coord[1], coord[2], coord[3]);
+				break;
+			case PathIterator.SEG_CUBICTO:
+				System.out.format("  curveTo(%f,%f ; %f,%f ; %f,%f)%n", coord[0], coord[1], coord[2], coord[3],
+						coord[4], coord[5]);
+				break;
+			case PathIterator.SEG_CLOSE:
+				System.out.format("  closePath()%n", coord[0], coord[1]);
+				break;
+			}
+		}
 	}
 }
