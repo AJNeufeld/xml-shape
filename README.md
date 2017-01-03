@@ -6,7 +6,25 @@ Persistence Delegates for java.awt.Shape objects
 The `java.beams.XMLEncoder` does not, without additional assistance, properly serialize `Area`, `Path2D`, or `GeneralPath` objects.
 Assistance to the `XMLEncoder` may be provided via `PersistenceDelegate` objects registered for the appropriate classes.
 This package provides the required assistance.
- 
+
+
+Downloads
+---------
+You can obtain the hamcrest-path binaries from [maven central][], To include in your project:
+
+A Maven project:
+
+    <dependency>
+	    <groupId>ca.seinesoftware</groupId>
+	    <artifactId>xml-shape</artifactId>
+	    <version>1.0.0</version>
+	   </dependency>
+
+A project which uses ivy for dependency management:
+
+    <dependency org="ca.seinesoftware" name="xml-shape" rev="1.0.0"/>
+
+
 Usage
 -----
 
@@ -85,4 +103,4 @@ a persistence delegate for just my own `Path2D` object in my private project.
 
 [Andrew Thompson]: http://stackoverflow.com/users/418556/andrew-thompson
 [question on StackOverflow]: http://stackoverflow.com/questions/26579729/how-to-serialize-java-2d-shape-objects-as-xml/
-
+[maven central]: http://search.maven.org/#search%7Cga%7C1%7Cg%3Aca.seinesoftware
