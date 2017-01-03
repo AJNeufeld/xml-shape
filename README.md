@@ -10,15 +10,15 @@ This package provides the required assistance.
 
 Downloads
 ---------
-You can obtain the hamcrest-path binaries from [maven central][], To include in your project:
+You can obtain the xml-shape binaries from [maven central][], To include in your project:
 
 A Maven project:
 
     <dependency>
-	    <groupId>ca.seinesoftware</groupId>
-	    <artifactId>xml-shape</artifactId>
-	    <version>1.0.0</version>
-	   </dependency>
+      <groupId>ca.seinesoftware</groupId>
+      <artifactId>xml-shape</artifactId>
+      <version>1.0.0</version>
+    </dependency>
 
 A project which uses ivy for dependency management:
 
